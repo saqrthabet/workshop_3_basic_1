@@ -1,0 +1,105 @@
+https://docs.python.org/3.4/tutorial/classes.html           /// information about classes
+https://macdiscussions.udacity.com/t/3-classes-oop/189543/54
+https://docs.python.org/3/library/unittest.html#unittest.TestCase.debug
+
+--------Dear Mr.Shadi, I hope you are faring well, I apologize in advance for using English, but for me it is only way to explain the points, which I aspire to have a detailed clarification about.
+1- How can I automatically provoke (class Customer) within (function add_new_reservation) which is considered a function in (class Reservation)? Actually, I could not assign an (instance object) to (class Customer) when (function reserve_room) gives a positive response to   (function add_new_reservation).
+2- I also want to shed some light on the difference between the (list) used in both (class Hotel) & (class Customer)
+class Hotel:
+   hotel=[]
+  def __init__(self, number......):
+        self.number=number
+        ...
+        Hotel.hotels.append([self.number ,.....])
+the final answer/ouput of the last instance object is an accumulation of lists of each different hotel lays side by side, whereas
+class Customer():
+    def __init__(self,customer_name,.....):
+        self.customer_name=customer_name
+        .......
+        self.customer_list=[]    
+    def add_customer(self):     
+         self.customer_list.append(self) # or (self.customer_name,self.customer_number)
+the final answer/output of the last instance object is just itself.
+
+{ Reservation confirmation and assign customer name for class Customer }
+
+--------------Mr.Shadi responses
+I’ll give an example about A and B:
+
+class A():
+    ...
+    def do_somthing_with_B(self, b_instance):
+        self.b_instance = b_instance
+        ...
+    def display_B(self):
+        print self.b_instance.name + " " + self.b_instance.number
+
+class B():
+    def __init__(self,name,number):
+        self.id = GenerateNewID()   # this is dummy function to show the concept
+        self.name = name
+        self.number = number
+
+def main():
+    my_b = B("Shadi","100") # see I have created B totally outside A, I shoud not relay on A to create B
+    m_a = A()  
+    m_a.do_something_with_B(my_b) # then I feeded a ready object of B to A
+    m.display_B()
+this is how OO is represented, however, this is not the way that these two objects will be saved physically, in the DB world we don’t need to do the following:
+
+class A():
+    ... 
+    self.b_instance = b_instance
+we can only use an ID of b_instance and we store that ID inside a,
+
+class A():
+    ... 
+    self.b_instance_id = b_instance_id
+but once we read from DB and store as OO then we need to have a full access to the object b.
+
+We will see this in details once we start with django database, this is the coming workshop ISA Workshop 8 
+----------------------------------
+Hints. How does the location of defining self.message=[] make a difference when a function(def add_new_reservation(self)) is defined in a Class?   
+
+class Reservation():        # not working due to existance of function within the class, def add_new_reservation(self) that its input arguement includes self.message=[] 
+    reservations=[]                                                                                    
+    def __init__(self,hotel_name, .....):
+        self.hotel_name=hotel_name
+        ......
+        self.message=[]  
+       
+    def add_new_reservation(self): 
+        if reserve_room(self.hotel_name,.....):                        
+            Reservation.reservations.append([self.hotel_name,.....])
+            self.message.append(   
+
+class Reservation():      # working due to avoid defining self.message=[] before the function within the class,
+                               #so its input arguement are no longer including self.message=[]     
+    reservations=[]                                                                                    
+    def __init__(self,hotel_name, .....):
+        self.hotel_name=hotel_name
+        ......
+       
+    def add_new_reservation(self): 
+        self.message=[] 
+        if reserve_room(self.hotel_name,.....):                        
+            Reservation.reservations.append([self.hotel_name,.....])
+            self.message.append(   
+
+how to update the No. of empty rooms at Hotel.hotels[index_hotel][4]+=1 in hotel.py after(def delete_a_reservation(self)) in reservation.py ?
+ 
+I had problems even while using simple functions in tester.py,(to assure organize different tests in different func. within tester.py) for instance:
+-functions defined in <main.py> list_hotels_in_city(city) & list_resevrations_for_hotel(hotel_name), I could't perform them at tester.py, as main.list_hotels_in_city(city) & main.ist_resevrations_for_hotel(hotel_name) while writing ( import main) at the head of <tester.py>
+- In the same way I could't use main.start_app(), as I was resorted to move the whole function start_app() to <tester.py>
+- Even when assigning customers to Reservation class in <tester.py>, I could't use those instance object of Reservation class inside function those
+existed inside the <tester.py> itself like:
+show=Notification()
+from reservation import Reservation
+
+Saqr_Thabet=Reservation("Hayat","Saqr_thabet","+8613094449161")
+def Test_Reservation():
+	show.display(Saqr_Thabet.message)
+
+
+                
+
