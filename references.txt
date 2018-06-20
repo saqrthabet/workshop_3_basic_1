@@ -60,7 +60,6 @@ but once we read from DB and store as OO then we need to have a full access to t
 We will see this in details once we start with django database, this is the coming workshop ISA Workshop 8 
 ----------------------------------
 Hints. How does the location of defining self.message=[] make a difference when a function(def add_new_reservation(self)) is defined in a Class?   
-
 class Reservation():        # not working due to existance of function within the class, def add_new_reservation(self) that its input arguement includes self.message=[] 
     reservations=[]                                                                                    
     def __init__(self,hotel_name, .....):
