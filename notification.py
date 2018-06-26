@@ -10,7 +10,8 @@ class Notifications:
     def display(self,message):
         self.message=message
         print(self.message)
-
+        #print(list(self.message))  #list is added, as its not a simple list because returned object is not a list.
+ 
     def send_message(self,message,customer_number): # how to deal with hotel_name & customer_name
         self.message=message
         self.customer_number=customer_number
