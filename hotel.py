@@ -12,6 +12,10 @@ class Hotel():
         self.total_rooms = total_rooms
         self.empty_rooms = empty_rooms
 
+    def __repr__(self):
+        return f'Hotel({self.number!r}, {self.hotel_name !r},{self.city !r},{self.total_rooms !r},{self.empty_rooms !r})'
+       
+        
     def check_if_duplicate(self): # check whether hotel is a duplicate or not
         existed= False
         for hotel in Hotel.hotels:

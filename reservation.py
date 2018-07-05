@@ -15,7 +15,9 @@ class Reservation():
         self.customer=customer_name
         self.number=customer_number
         #self.message=[]  # if  defined here,in order to have a unique output for each instance object, I get double results
-       
+    def __repr__(self):
+        return f'Reservation({self.hotel_name!r}, {self.customer !r},{self.number !r})' 
+     
     def add_new_reservation(self): # will face a problem if self.message=[]is defined above
         self.message=[]  # defined here,in order to have a unique output for each instance object,this instance variable will be assigned to Notification
         self.room_No=[]
@@ -33,6 +35,7 @@ class Reservation():
         #Reservation.reservations.remove([self.hotel_name, self.customer, self.number,self.room_No])  #Hotel.hotels[index_hotel][4] unkown value
         #self.room_No+=1         # how to update the No. of empty rooms at Hotel.hotels[index_hotel][4]+=1 e
         Reservation.reservations.remove(self)
+
 def reserve_room(hotel_name,customer_name): 
     not_here=True
     for hotel in Hotel.hotels:

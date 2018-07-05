@@ -10,6 +10,8 @@ class Customer():
         self.hotel_booked=hotel_booked
         self.name=customer_name
         self.number=customer_number
+    def __repr__(self):
+        return f'Customer({self.hotel_booked!r}, {self.name !r},{self.number !r})'
         
     def check_if_duplicate(self): # check whether customer is a duplicate or not
         existed= False
